@@ -16,7 +16,7 @@ int main()
 {
     int Digit;
     cin >> Digit;
-    if (Digit > 0 || Digit < 3200000)
+    if (Digit > 0 && Digit < 3200000)
     {        
         cout << "Position - \t" <<  DetermineDigit(Digit) << endl;
     }
