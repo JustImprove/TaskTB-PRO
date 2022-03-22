@@ -13,6 +13,7 @@ int Strlen(char* Str)
     return Count;
 }
 
+#pragma region OldMethod
 void InsertDigit(char* Str, int Digit) 
 {
         int Temp = Digit;
@@ -38,6 +39,19 @@ void InsertDigit(char* Str, int Digit)
             }
         }
 }
+#pragma endregion
+
+void StrConcat(char* Holder, const char* Source) 
+{
+    for (int i = Strlen(Holder), iter = 0; Source[iter] != '\0'; i++, iter++)
+    {
+        Holder[i] = Source[iter];
+        if (Source[iter + 1] == '\0')
+        {
+            Holder[i + 1] = '\0';
+        }     
+    }
+}
 
 int DetermineDigit(int Val) 
 {
@@ -47,21 +61,29 @@ int DetermineDigit(int Val)
         if (Strlen(str) > Val)
         {          
             return (str[Val - 1] - '0');
-        }       
-        InsertDigit(str, (i*i));
+        }      
+        /* InsertDigit(str, (i*i)); */
+        StrConcat(str, (to_string((i*i)).c_str()));
     }
 }
 
 int main() 
 {
-    int Digit;
-    cin >> Digit;
-    if (Digit > 0 && Digit < 3200000)
-    {        
-        cout << "Position - \t" <<  DetermineDigit(Digit) << endl;
-    }
-    else 
+    try
     {
-        return -1;
+        int Digit;
+        cin >> Digit;
+        if (Digit > 0 && Digit < 3200000)
+        {        
+            cout << "Position - \t" <<  DetermineDigit(Digit) << endl;
+        }
+        else 
+        {
+            return -1;
+        }
+    }
+    catch(const exception& ex)
+    {
+        cout << ex.what() << endl;
     }
 }
